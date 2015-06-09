@@ -1,0 +1,65 @@
+{
+	"ImportPath": "godbfexam",
+	"GoVersion": "go1.4.2",
+	"Packages": [
+		"godbfexam/..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/cihub/seelog",
+			"Comment": "go1.1-76-g8762324",
+			"Rev": "8762324945b8f31888f8bfa3bd7fca04c20e2639"
+		},
+		{
+			"ImportPath": "github.com/djimenez/iconv-go",
+			"Rev": "5f6a5a4f0011195c0147545149ad54f4adb54757"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin",
+			"Comment": "v0.4-222-g05d01d2",
+			"Rev": "05d01d2282a7cf1d78bd4525ee6e0637be4eec35"
+		},
+		{
+			"ImportPath": "github.com/lib/pq",
+			"Comment": "go1.0-cutoff-47-g93e9980",
+			"Rev": "93e9980741c9e593411b94e07d5bad8cfb4809db"
+		},
+		{
+			"ImportPath": "github.com/manucorporat/sse",
+			"Rev": "c60c0e49b3ad42e8386e07720f0f561dd6bedaef"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-colorable",
+			"Rev": "d67e0b7d1797975196499f79bcc322c08b9f218b"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-isatty",
+			"Rev": "ae0b1f8f8004be68d791a576e3d8e7648ab41449"
+		},
+		{
+			"ImportPath": "github.com/mikeshimura/dbflute/df",
+			"Rev": "421d00accd3040d577f63f35142207d40d67baec"
+		},
+		{
+			"ImportPath": "github.com/mikeshimura/dbflute/log",
+			"Rev": "421d00accd3040d577f63f35142207d40d67baec"
+		},
+		{
+			"ImportPath": "github.com/mikeshimura/dfweb",
+			"Rev": "d6cceb87f37644efc19f95865a597f96096fda2e"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "5aa7325eaa14d7ed4b520f40d58adf2834c8de01"
+		},
+		{
+			"ImportPath": "gopkg.in/joeybloggs/go-validate-yourself.v4",
+			"Comment": "v4.0.4",
+			"Rev": "47a6634ff80051b92481b6c076854b85119fd267"
+		},
+		{
+			"ImportPath": "mikegou/adf",
+			"Rev": "e2e980f3fe608507dc2febfd6f936f49e60880b7"
+		}
+	]
+}
