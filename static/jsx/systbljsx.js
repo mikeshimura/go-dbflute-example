@@ -58,7 +58,7 @@ $w.systblRows = React.createClass({
 $w.Application = React.createClass({
   mixins: [$w.FluxMixin, $w.StoreWatchMixin("PAGE","COMMON","RCD")],
   getInitialState: function() {
-  $w.application = this;
+  $w.app = this;
   blank={
           tableName:"",
           key1:"",

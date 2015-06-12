@@ -84,8 +84,10 @@
   $w.formClear = function(jsx) {
     var formtemp;
     formtemp = {
-      form: _.cloneDeep(jsx.state.systbl.blank)
+      form: _.cloneDeep(jsx.state.systbl.blank),
+      systbl: $w.app.state.systbl
     };
+    formtemp.systbl.selRow = -1;
     return jsx.setState(formtemp);
   };
   $w.constants = {
@@ -116,26 +118,19 @@
   rcdStore.addTable("systbl");
   $w.FluxMixin = Fluxxor.FluxMixin(React);
   $w.StoreWatchMixin = Fluxxor.StoreWatchMixin;
-  $w.fix = function() {
-    return $('#tablesystbl').tablefix({
-      width: 900,
-      height: 300,
-      fixRows: 1
-    });
-  };
   $w.rcdStore.on("rcdComplete_systbl", function() {
     var rcdTemp, temp;
-    rcdTemp = _.cloneDeep($w.application.state.rcd.systbl);
+    rcdTemp = _.cloneDeep($w.app.state.rcd.systbl);
     temp = {
-      systbl: $w.application.state.systbl
+      systbl: $w.app.state.systbl
     };
     temp.systbl.rcds = rcdTemp.rcds;
     temp.form = rcdTemp.rcd;
     temp.systbl.selRow = rcdTemp.selRow;
-    return $w.application.setState(temp);
+    return $w.app.setState(temp);
   });
   $w.getDom = function(refname) {
-    return $w.application.refs[refname].getDOMNode();
+    return $w.app.refs[refname].getDOMNode();
   };
   $w.scroll = function() {
     return $w.getDom("tableHead").scrollLeft = $w.getDom("tableBody").scrollLeft;

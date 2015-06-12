@@ -6,6 +6,11 @@
 	],
 	"Deps": [
 		{
+			"ImportPath": "code.google.com/p/go-uuid/uuid",
+			"Comment": "null-15",
+			"Rev": "35bc42037350f0078e3c974c6ea690f1926603ab"
+		},
+		{
 			"ImportPath": "github.com/cihub/seelog",
 			"Comment": "go1.1-76-g8762324",
 			"Rev": "8762324945b8f31888f8bfa3bd7fca04c20e2639"
@@ -46,7 +51,7 @@
 		},
 		{
 			"ImportPath": "github.com/mikeshimura/dfweb",
-			"Rev": "d6cceb87f37644efc19f95865a597f96096fda2e"
+			"Rev": "05693b4d282ca5fab061f0282a92624981e01fab"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",
@@ -56,10 +61,6 @@
 			"ImportPath": "gopkg.in/joeybloggs/go-validate-yourself.v4",
 			"Comment": "v4.0.4",
 			"Rev": "47a6634ff80051b92481b6c076854b85119fd267"
-		},
-		{
-			"ImportPath": "mikegou/adf",
-			"Rev": "e2e980f3fe608507dc2febfd6f936f49e60880b7"
 		}
 	]
 }

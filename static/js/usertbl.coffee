@@ -60,7 +60,9 @@ $w.formUpdateCheck = (form) ->
 $w.formClear = (jsx) ->
   formtemp={
     form:_.cloneDeep(jsx.state.usertbl.blank)
+    usertbl:$w.app.state.usertbl
   }
+  formtemp.usertbl.selRow=-1
   jsx.setState(formtemp)
 $w.constants =
   $W_LOGIN_SUCCESS: "$W_LOGIN_SUCCESS"
@@ -93,20 +95,20 @@ rcdStore = $w.flux.store("RCD")
 rcdStore.addTable("usertbl")
 $w.FluxMixin = Fluxxor.FluxMixin(React)
 $w.StoreWatchMixin = Fluxxor.StoreWatchMixin
-$w.fix = ->
-  $('#tableusertbl').tablefix({width:900,height:300,fixRows:1})
+#$w.fix = ->
+#  $('#tableusertbl').tablefix({width:900,height:300,fixRows:1})
 $w.rcdStore.on("rcdComplete_usertbl", ->
-  rcdTemp=_.cloneDeep($w.application.state.rcd.usertbl)
+  rcdTemp=_.cloneDeep($w.app.state.rcd.usertbl)
   temp={
-    usertbl:$w.application.state.usertbl
+    usertbl:$w.app.state.usertbl
   }
   temp.usertbl.rcds=rcdTemp.rcds
   temp.form=rcdTemp.rcd
   temp.usertbl.selRow=rcdTemp.selRow
-  $w.application.setState(temp) 
+  $w.app.setState(temp) 
 )
 $w.getDom = (refname) ->
-  return $w.application.refs[refname].getDOMNode()
+  return $w.app.refs[refname].getDOMNode()
   
 $w.scroll = ->
   $w.getDom("tableHead").scrollLeft=$w.getDom("tableBody").scrollLeft

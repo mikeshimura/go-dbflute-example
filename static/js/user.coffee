@@ -73,7 +73,9 @@ $w.formUpdateCheck = (form) ->
 $w.formClear = (jsx) ->
   formtemp={
       form:_.cloneDeep(jsx.state.login.blank)
+  login:$w.app.state.login
   }
+  formtemp.login.selRow=-1
   jsx.setState(formtemp)
 $w.constants =
   $W_LOGIN_SUCCESS: "$W_LOGIN_SUCCESS"

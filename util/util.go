@@ -5,9 +5,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/mikeshimura/dbflute/df"
 	"github.com/mikeshimura/dfweb"
-	"mikegou/adf/bhv"
-	"mikegou/adf/cb"
-	"mikegou/adf/entity"
+	"godbfexam/adf/bhv"
+	"godbfexam/adf/cb"
+	"godbfexam/adf/entity"
 	"strconv"
 )
 

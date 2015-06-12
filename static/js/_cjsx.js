@@ -87,7 +87,8 @@ $c.SelectOption = React.createClass({displayName: 'SelectOption',
       },
     render: function() {
          var options = this.props.options.map(function(opt, i){
-          return React.createElement("option", {key: i, value: opt.value, label: opt.label}, opt.label);
+          return React.createElement("option", {key: i, value: opt.value, label: opt.label, 
+          selected: this.props.defaultValue == opt.value}, opt.label);
         }, this);
           return ( 
             React.createElement(b.Input, {type: "select", label: "", 

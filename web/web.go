@@ -15,9 +15,35 @@ func IndexHtml(c *gin.Context) {
 	c.HTMLString(200, html)
 }
 
-func TemplateHtml(c *gin.Context) {
-	title := "TEMPLATE"
-	js := []string{"/js/$c.js", "/js/$v.js", "/js/template.js", "/js/_cjsx.js", "/js/templatejsx.js"}
+func UserHtml(c *gin.Context) {
+	title := "USER管理"
+	js := []string{"/js/$c.js", "/js/$v.js", "/js/user.js", "/js/_cjsx.js", "/js/userjsx.js"}
+	jslib := []string{"/js/lib/fluxxor.js", "/js/lib/react.js", "/js/lib/react-bootstrap.js",
+		"/js/lib/jquery-1.11.1.js", "/js/lib/lodash.js"}
+	css := []string{"/css/bootstrap.css", "/css/main.css"}
+	GenerateAuthorizedScreen(c, title, js, jslib, css, []string{})
+}
+
+func UserTblHtml(c *gin.Context) {
+	title := "USER TABLE"
+	js := []string{"/js/$c.js", "/js/$v.js", "/js/usertbl.js", "/js/_cjsx.js", "/js/usertbljsx.js"}
+	jslib := []string{"/js/lib/fluxxor.js", "/js/lib/react.js", "/js/lib/react-bootstrap.js",
+		"/js/lib/jquery-1.11.1.js", "/js/lib/lodash.js"}
+	css := []string{"/css/bootstrap.css", "/css/main.css"}
+	GenerateAuthorizedScreen(c, title, js, jslib, css, []string{})
+}
+func SysTblHtml(c *gin.Context) {
+	title := "SYSTEM TABLE"
+	js := []string{"/js/$c.js", "/js/$v.js", "/js/systbl.js", "/js/_cjsx.js", "/js/systbljsx.js"}
+	jslib := []string{"/js/lib/fluxxor.js", "/js/lib/react.js", "/js/lib/react-bootstrap.js",
+		"/js/lib/jquery-1.11.1.js", "/js/lib/lodash.js"}
+	css := []string{"/css/bootstrap.css", "/css/main.css"}
+	GenerateAuthorizedScreen(c, title, js, jslib, css, []string{})
+}
+
+func EmployeeHtml(c *gin.Context) {
+	title := "従業員マスター"
+	js := []string{"/js/$c.js", "/js/$v.js", "/js/employee.js", "/js/_cjsx.js", "/js/employeejsx.js"}
 	jslib := []string{"/js/lib/fluxxor.js", "/js/lib/react.js", "/js/lib/react-bootstrap.js",
 		"/js/lib/jquery-1.11.1.js", "/js/lib/lodash.js"}
 	css := []string{"/css/bootstrap.css", "/css/main.css"}

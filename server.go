@@ -17,10 +17,19 @@ func main() {
 	util.Sslmode = "disable"
 	r := gin.Default()
 	r.GET("/", web.IndexHtml)
+	r.GET("/user", web.UserHtml)
+	r.GET("/usertbl", web.UserTblHtml)
+	r.GET("/systbl", web.SysTblHtml)
+	r.GET("/employee", web.EmployeeHtml)
 	ajax := r.Group("/ajax")
 
 	{
-		ajax = ajax
+		ajax.POST("/loginauth", web.Loginauth)
+		ajax.POST("/logout", web.Logout)
+		ajax.POST("/login", web.LoginExec)
+		ajax.POST("/usertbl", web.UserTableExec)
+		ajax.POST("/systbl", web.SysTableExec)
+		ajax.POST("/employee", web.EmployeeExec)
 	}
 	r.Static("/static", "./static")
 	r.Run(":" + os.Getenv("PORT"))

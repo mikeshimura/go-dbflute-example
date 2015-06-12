@@ -57,7 +57,7 @@ $w.UsertblRows = React.createClass({displayName: 'UsertblRows',
 $w.Application = React.createClass({displayName: 'Application',
   mixins: [$w.FluxMixin, $w.StoreWatchMixin("PAGE","COMMON","RCD")],
   getInitialState: function() {
-  $w.application = this;
+  $w.app = this;
   blank={
           tableName:"",
           key1:"",

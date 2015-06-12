@@ -98,8 +98,10 @@
   $w.formClear = function(jsx) {
     var formtemp;
     formtemp = {
-      form: _.cloneDeep(jsx.state.login.blank)
+      form: _.cloneDeep(jsx.state.login.blank),
+      login: $w.app.state.login
     };
+    formtemp.login.selRow = -1;
     return jsx.setState(formtemp);
   };
   $w.constants = {
