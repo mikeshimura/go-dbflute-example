@@ -51,7 +51,7 @@
 		},
 		{
 			"ImportPath": "github.com/mikeshimura/dfweb",
-			"Rev": "05693b4d282ca5fab061f0282a92624981e01fab"
+			"Rev": "47e07c8d767c76035e94b92d30f2ec000339664c"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",
