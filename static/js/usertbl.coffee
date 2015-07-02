@@ -1,9 +1,9 @@
 $c.checkAndCreate("$w")
  
-$w.handleChange = (jsx,e) ->
-  $c.handleChange(jsx,e.target.name,e.target.value);
+$w.handleChange = (e) ->
+  $c.handleChange($w.app,e.target.name,e.target.value);
 
-$w.handleClick = (jsx,e) ->
+$w.handleClick = (e) ->
   name=e.target.name
   if name=="alert#CloseBtn"
      $w.flux.actions.$c_alertHide()
@@ -11,31 +11,29 @@ $w.handleClick = (jsx,e) ->
      $w.flux.actions.$c_deleteCfmHide()
   if name=="deleteCfm#YesBtn"
      $w.flux.actions.$c_deleteCfmHide()
-     $w.formDeleteCfm(jsx)
-  if name == "btnNew"
-    $w.formClear(jsx)
-  if name == "btnSearch"
-    $w.formSearch(jsx)
-  if name == "btnUpdate"
-    $w.formUpdate(jsx)
-  if name == "btnDelete"
-    $w.formDelete(jsx)
+     $w.app.state.common.deleteCfm.callback()
+  if name == "usertbl_btnNew"
+    $w.usertbl_formClear()
+  if name == "usertbl_btnSearch"
+    $w.usertbl_formSearch()
+  if name == "usertbl_btnUpdate"
+    $w.usertbl_formUpdate()
+  if name == "usertbl_btnDelete"
+    $w.usertbl_formDelete()
   if typeof(e.target.id)=="undefined"
     return
   ids = e.target.id.split("#");
-  if (ids[0] == "row")
-    temp={ usertbl:jsx.state.usertbl }
+  if (ids[0] == "usertbl_row")
+    temp={ usertbl:$w.app.state.usertbl }
     selRow = Number(ids[2])
     temp.usertbl.selRow=selRow
-    temp.form=_.cloneDeep(temp.usertbl.rcds[selRow])
-    temp.form.password=""
-    temp.form.passwordcfm=""
-    jsx.setState(temp)
-$w.formSearch = (jsx) ->
-  criteria=$c.createCriteria(jsx.state.search,["tableName","key1"])
-  $w.flux.actions.$c_rcd_fetch(jsx.state.usertbl,jsx.state.form,"usertbl",criteria)
-$w.formUpdate = (jsx) ->
-  form = jsx.state.form
+    temp.usertbl_form=_.cloneDeep(temp.usertbl.rcds[selRow])
+    $w.app.setState(temp)
+$w.usertbl_formSearch = () ->
+  criteria=$c.createCriteria($w.app.state.usertbl_search,["tableName","key1"])
+  $w.flux.actions.$c_rcd_fetch($w.app.state.usertbl,$w.app.state.usertbl_form,"usertbl",criteria)
+$w.usertbl_formUpdate = () ->
+  form = $w.app.state.usertbl_form
   res = ""
   if form.id==""
     rules = []
@@ -43,27 +41,22 @@ $w.formUpdate = (jsx) ->
   if res.length > 0
     $w.flux.actions.$c_alertShow(res)
     return
-  $w.flux.actions.$c_rcd_update(jsx.state.usertbl,jsx.state.form,"usertbl")
-$w.formDelete = (jsx) ->
-  if jsx.state.form.id == ""
+  $w.flux.actions.$c_rcd_update($w.app.state.usertbl,$w.app.state.usertbl_form,"usertbl")
+$w.usertbl_formDelete = () ->
+  if $w.app.state.usertbl_form.id == ""
     $w.flux.actions.$c_rcd_delete_id_blank()
     return
-  $w.flux.actions.$c_deleteCfmShow()
-$w.formDeleteCfm = (jsx) ->
-  $w.flux.actions.$c_rcd_delete(jsx.state.usertbl,jsx.state.form,"usertbl")
-$w.formUpdateCheck = (form) ->
-  if form.password>"" || form.passwordcfm>""
-    if form.password != form.passwordcfm
-      return [["", "パスワードとパスワード（確認）が一致しません"]]
-  return ""
+  $w.flux.actions.$c_deleteCfmShow($w.formDeleteCfm)
+$w.formDeleteCfm = () ->
+  $w.flux.actions.$c_rcd_delete($w.app.state.usertbl,$w.app.state.usertbl_form,"usertbl")
  
-$w.formClear = (jsx) ->
+$w.usertbl_formClear = () ->
   formtemp={
-    form:_.cloneDeep(jsx.state.usertbl.blank)
+    usertbl_form:_.cloneDeep($w.app.state.usertbl.blank)
     usertbl:$w.app.state.usertbl
   }
   formtemp.usertbl.selRow=-1
-  jsx.setState(formtemp)
+  $w.app.setState(formtemp)
 $w.constants =
   $W_LOGIN_SUCCESS: "$W_LOGIN_SUCCESS"
 
@@ -103,14 +96,14 @@ $w.rcdStore.on("rcdComplete_usertbl", ->
     usertbl:$w.app.state.usertbl
   }
   temp.usertbl.rcds=rcdTemp.rcds
-  temp.form=rcdTemp.rcd
+  temp.usertbl_form=rcdTemp.rcd
   temp.usertbl.selRow=rcdTemp.selRow
   $w.app.setState(temp) 
 )
 $w.getDom = (refname) ->
   return $w.app.refs[refname].getDOMNode()
   
-$w.scroll = ->
-  $w.getDom("tableHead").scrollLeft=$w.getDom("tableBody").scrollLeft
-$w.onscroll = ->
-  $w.getDom("tableBody").onscroll=$w.scroll
+$w.usertbl_scroll = ->
+  $w.getDom("usertbl_tableHead").scrollLeft=$w.getDom("usertbl_tableBody").scrollLeft
+$w.usertbl_onscroll = ->
+  $w.getDom("usertbl_tableBody").onscroll=$w.usertbl_scroll

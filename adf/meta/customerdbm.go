@@ -55,7 +55,7 @@ func Create_CustomerDbm() {
 	idSqlName.IrregularChar = false
 	CustomerDbm.ColumnId = df.CCI(&customer, "id", idSqlName, "", "",
                "Integer.class", "id", "", true, true,true, "serial", 10, 0,
-               "nextval('customer_id_seq'::regclass)",false,"","", "","salesSlipList","",false,"int64")
+               "nextval('customer_id_seq'::regclass)",false,"","", "","","",false,"int64")
 	cusCdSqlName := new(df.ColumnSqlName)
 	cusCdSqlName.ColumnSqlName = "cus_cd"
 	cusCdSqlName.IrregularChar = false
@@ -72,38 +72,38 @@ func Create_CustomerDbm() {
 	addrSqlName.ColumnSqlName = "addr"
 	addrSqlName.IrregularChar = false
 	CustomerDbm.ColumnAddr = df.CCI(&customer, "addr", addrSqlName, "", "",
-               "String.class", "addr", "", false, false,true, "varchar", 100, 0,
-               "",false,"","", "","","",false,"string")
+               "String.class", "addr", "", false, false,false, "varchar", 100, 0,
+               "",false,"","", "","","",false,"sql.NullString")
 	bldgSqlName := new(df.ColumnSqlName)
 	bldgSqlName.ColumnSqlName = "bldg"
 	bldgSqlName.IrregularChar = false
 	CustomerDbm.ColumnBldg = df.CCI(&customer, "bldg", bldgSqlName, "", "",
-               "String.class", "bldg", "", false, false,true, "varchar", 100, 0,
-               "",false,"","", "","","",false,"string")
+               "String.class", "bldg", "", false, false,false, "varchar", 100, 0,
+               "",false,"","", "","","",false,"sql.NullString")
 	cusConSecSqlName := new(df.ColumnSqlName)
 	cusConSecSqlName.ColumnSqlName = "cus_con_sec"
 	cusConSecSqlName.IrregularChar = false
 	CustomerDbm.ColumnCusConSec = df.CCI(&customer, "cus_con_sec", cusConSecSqlName, "", "",
-               "String.class", "cusConSec", "", false, false,true, "varchar", 100, 0,
-               "",false,"","", "","","",false,"string")
+               "String.class", "cusConSec", "", false, false,false, "varchar", 100, 0,
+               "",false,"","", "","","",false,"sql.NullString")
 	cusConNameSqlName := new(df.ColumnSqlName)
 	cusConNameSqlName.ColumnSqlName = "cus_con_name"
 	cusConNameSqlName.IrregularChar = false
 	CustomerDbm.ColumnCusConName = df.CCI(&customer, "cus_con_name", cusConNameSqlName, "", "",
-               "String.class", "cusConName", "", false, false,true, "varchar", 100, 0,
-               "",false,"","", "","","",false,"string")
+               "String.class", "cusConName", "", false, false,false, "varchar", 100, 0,
+               "",false,"","", "","","",false,"sql.NullString")
 	telSqlName := new(df.ColumnSqlName)
 	telSqlName.ColumnSqlName = "tel"
 	telSqlName.IrregularChar = false
 	CustomerDbm.ColumnTel = df.CCI(&customer, "tel", telSqlName, "", "",
-               "String.class", "tel", "", false, false,true, "varchar", 100, 0,
-               "",false,"","", "","","",false,"string")
+               "String.class", "tel", "", false, false,false, "varchar", 100, 0,
+               "",false,"","", "","","",false,"sql.NullString")
 	salesAmountSqlName := new(df.ColumnSqlName)
 	salesAmountSqlName.ColumnSqlName = "sales_amount"
 	salesAmountSqlName.IrregularChar = false
 	CustomerDbm.ColumnSalesAmount = df.CCI(&customer, "sales_amount", salesAmountSqlName, "", "",
-               "Long.class", "salesAmount", "", false, false,true, "int8", 19, 0,
-               "",false,"","", "","","",false,"int64")
+               "Long.class", "salesAmount", "", false, false,false, "int8", 19, 0,
+               "",false,"","", "","","",false,"sql.NullInt64")
 	versionNoSqlName := new(df.ColumnSqlName)
 	versionNoSqlName.ColumnSqlName = "version_no"
 	versionNoSqlName.IrregularChar = false

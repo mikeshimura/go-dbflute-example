@@ -27,8 +27,6 @@ type SalesSlip struct {
 	updateUser string
 	updateProcess string
 	df.BaseEntity
-Customer_R  *Customer
-
 Product_R  *Product
 
 Employee_R  *Employee
@@ -225,12 +223,6 @@ func (t *SalesSlip) SetUpdateUser(updateUser string) {
 func (t *SalesSlip) SetUpdateProcess(updateProcess string) {
 	t.AddPropertyName("updateProcess")
 	t.updateProcess = updateProcess
-}
-func (t *SalesSlip) GetCustomer_R() *Customer{
-	return t.Customer_R
-}
-func (t *SalesSlip) SetCustomer_R(value *Customer) {
-    t.Customer_R = value
 }
 func (t *SalesSlip) GetProduct_R() *Product{
 	return t.Product_R

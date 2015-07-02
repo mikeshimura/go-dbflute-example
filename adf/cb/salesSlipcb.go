@@ -9,7 +9,6 @@ import (
 type SalesSlipCB struct {
 	BaseConditionBean *df.BaseConditionBean
 	query             *cq.SalesSlipCQ
-    NssCustomer *CustomerNss
     NssProduct *ProductNss
     NssEmployee *EmployeeNss
 }
@@ -43,15 +42,6 @@ func (l *SalesSlipCB) AllowEmptyStringQuery() {
 	l.BaseConditionBean.AllowEmptyStringQuery()
 }
 
-func (l *SalesSlipCB) SetupSelect_Customer() *CustomerNss {
-	l.BaseConditionBean.DoSetupSelect(l.Query().GetBaseConditionQuery(),
-		l.Query().QueryCustomer().GetBaseConditionQuery())
-	if l.NssCustomer == nil || !l.NssCustomer.hasConditionQuery() {
-		l.NssCustomer = new(CustomerNss)
-		l.NssCustomer.Query = l.Query().QueryCustomer()
-	}
-	return l.NssCustomer
-}
 func (l *SalesSlipCB) SetupSelect_Product() *ProductNss {
 	l.BaseConditionBean.DoSetupSelect(l.Query().GetBaseConditionQuery(),
 		l.Query().QueryProduct().GetBaseConditionQuery())
@@ -83,18 +73,8 @@ func (l *SalesSlipCB) OrScopeQuery(fquery func(*SalesSlipCB)){
 
 type SalesSlipNss struct {
 	Query *cq.SalesSlipCQ
-    NssCustomer *CustomerNss
     NssProduct *ProductNss
     NssEmployee *EmployeeNss
-}
-func (p *SalesSlipNss) WithCustomer() *CustomerNss{
-	(*p.Query.BaseConditionQuery.BaseCB).GetBaseConditionBean().
-	DoSetupSelect(p.Query.BaseConditionQuery,p.Query.QueryCustomer().GetBaseConditionQuery())
-	if p.NssCustomer == nil || !p.NssCustomer.hasConditionQuery() {
-		p.NssCustomer = new(CustomerNss)
-		p.NssCustomer.Query = p.Query.QueryCustomer()
-	}
-	return p.NssCustomer
 }
 func (p *SalesSlipNss) WithProduct() *ProductNss{
 	(*p.Query.BaseConditionQuery.BaseCB).GetBaseConditionBean().

@@ -55,7 +55,7 @@ $w.formDelete = () ->
   if $w.app.state.form.id == ""
     $w.flux.actions.$c_rcd_delete_id_blank()
     return
-  $w.flux.actions.$c_deleteCfmShow()
+  $w.flux.actions.$c_deleteCfmShow($w.formDeleteCfm)
 $w.formDeleteCfm = () ->
   $w.flux.actions.$c_rcd_delete($w.app.state.employee,$w.app.state.form,"employee")
 $w.formClear = () ->

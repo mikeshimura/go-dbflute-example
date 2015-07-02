@@ -27,7 +27,6 @@ type SalesSlipCQ struct {
 	UpdateDatetime *df.ConditionValue
 	UpdateUser *df.ConditionValue
 	UpdateProcess *df.ConditionValue
-    conditionQueryCustomer *CustomerCQ
     conditionQueryProduct *ProductCQ
     conditionQueryEmployee *EmployeeCQ
 }
@@ -1337,32 +1336,6 @@ func (q *SalesSlipCQ) regUpdateProcess(key *df.ConditionKey, value interface{}) 
 }
 
 
-func (q *SalesSlipCQ) QueryCustomer() *CustomerCQ {
-	if q.conditionQueryCustomer == nil {
-		q.conditionQueryCustomer = q.xcreateQueryCustomer()
-		q.xsetupOuterJoinCustomer()
-	}
-	return q.conditionQueryCustomer
-}
-
-func (q *SalesSlipCQ) xcreateQueryCustomer() *CustomerCQ {
-	nrp := q.BaseConditionQuery.ResolveNextRelationPath("SalesSlip", "Customer")
-	jan := q.BaseConditionQuery.ResolveJoinAliasName(nrp)
-	var basecq df.ConditionQuery = q
-	cq := CreateCustomerCQ(&basecq, q.BaseConditionQuery.SqlClause, jan, q.BaseConditionQuery.NestLevel+1)
-	cq.BaseConditionQuery.BaseCB = q.BaseConditionQuery.BaseCB
-	cq.BaseConditionQuery.ForeignPropertyName = "Customer"
-	cq.BaseConditionQuery.RelationPath = nrp
-	return cq
-}
-func (q *SalesSlipCQ) xsetupOuterJoinCustomer() {
-	    cq := q.QueryCustomer()
-        joinOnMap := make(map[string]string)
-        joinOnMap["cusId"]="id"
-        q.BaseConditionQuery.RegisterOuterJoin(
-        	cq.BaseConditionQuery.ConditionQuery, joinOnMap, "Customer");
-}	
-	
 func (q *SalesSlipCQ) QueryProduct() *ProductCQ {
 	if q.conditionQueryProduct == nil {
 		q.conditionQueryProduct = q.xcreateQueryProduct()

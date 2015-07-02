@@ -28,7 +28,7 @@ type Employee struct {
 
 func (p *Employee) Exec() {
 	p.session, p.login, p.tx, p.ctx = util.GetSessionLogin(p.context, "userTable")
-	//defer dfweb.ErrorRecover(p.context, p.tx)
+	defer dfweb.ErrorRecover(p.context, p.tx)
 	json := dfweb.GetBodyJson(p.context)
 	operationType := (json["operationType"]).(string)
 	var data map[string]interface{}
@@ -92,7 +92,7 @@ func (p *Employee) Fetch(data map[string]interface{}) {
 	p.context.JSON(200, dfweb.SetNormalFetchResult(list))
 }
 func (p *Employee) Insert(data map[string]interface{}) {
-	p.ctx.Put("Process", "login:insert")
+	p.ctx.Put("Process", "employee:insert")
 	entityx := entity.CreateEmployee()
 	var e df.Entity = entityx
 	dfweb.MapToEntity(data, &e, "Employee", false)
@@ -109,7 +109,7 @@ func (p *Employee) Insert(data map[string]interface{}) {
 	p.context.JSON(200, dfweb.SetSingleFetchResult(rmap))
 }
 func (p *Employee) Update(data map[string]interface{}) {
-	p.ctx.Put("Process", "login:update")
+	p.ctx.Put("Process", "employee:update")
 	entityx := entity.CreateEmployee()
 	var e df.Entity = entityx
 	dfweb.MapToEntity(data, &e, "Employee", true)
@@ -142,7 +142,7 @@ func (p *Employee) GetUserTableSec(id int64) *entity.UserTable {
 	return (res.List.Get(0)).(*entity.UserTable)
 }
 func (p *Employee) Delete(id float64) {
-	p.ctx.Put("Process", "login:delete")
+	p.ctx.Put("Process", "employee:delete")
 	entityx := p.getOld(int64(id))
 	entityx.SetDelFlag(p.getDelFlagMaxValue(entityx) + 1)
 	_, err := bhv.EmployeeBhv_I.Update(entityx, p.tx, p.ctx)

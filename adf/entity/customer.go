@@ -2,18 +2,19 @@ package entity
 
 import (
 	"github.com/mikeshimura/dbflute/df"
+	"database/sql"
 )
 
 type Customer struct {
 	id int64
 	cusCd string
 	name string
-	addr string
-	bldg string
-	cusConSec string
-	cusConName string
-	tel string
-	salesAmount int64
+	addr sql.NullString
+	bldg sql.NullString
+	cusConSec sql.NullString
+	cusConName sql.NullString
+	tel sql.NullString
+	salesAmount sql.NullInt64
 	versionNo int64
 	delFlag int64
 	registerDatetime df.Timestamp
@@ -40,22 +41,22 @@ func (l *Customer) GetCusCd () string {
 func (l *Customer) GetName () string {
 	return l.name
 }
-func (l *Customer) GetAddr () string {
+func (l *Customer) GetAddr () sql.NullString {
 	return l.addr
 }
-func (l *Customer) GetBldg () string {
+func (l *Customer) GetBldg () sql.NullString {
 	return l.bldg
 }
-func (l *Customer) GetCusConSec () string {
+func (l *Customer) GetCusConSec () sql.NullString {
 	return l.cusConSec
 }
-func (l *Customer) GetCusConName () string {
+func (l *Customer) GetCusConName () sql.NullString {
 	return l.cusConName
 }
-func (l *Customer) GetTel () string {
+func (l *Customer) GetTel () sql.NullString {
 	return l.tel
 }
-func (l *Customer) GetSalesAmount () int64 {
+func (l *Customer) GetSalesAmount () sql.NullInt64 {
 	return l.salesAmount
 }
 func (l *Customer) GetVersionNo () int64 {
@@ -128,27 +129,27 @@ func (t *Customer) SetName(name string) {
 	t.AddPropertyName("name")
 	t.name = name
 }
-func (t *Customer) SetAddr(addr string) {
+func (t *Customer) SetAddr(addr sql.NullString) {
 	t.AddPropertyName("addr")
 	t.addr = addr
 }
-func (t *Customer) SetBldg(bldg string) {
+func (t *Customer) SetBldg(bldg sql.NullString) {
 	t.AddPropertyName("bldg")
 	t.bldg = bldg
 }
-func (t *Customer) SetCusConSec(cusConSec string) {
+func (t *Customer) SetCusConSec(cusConSec sql.NullString) {
 	t.AddPropertyName("cusConSec")
 	t.cusConSec = cusConSec
 }
-func (t *Customer) SetCusConName(cusConName string) {
+func (t *Customer) SetCusConName(cusConName sql.NullString) {
 	t.AddPropertyName("cusConName")
 	t.cusConName = cusConName
 }
-func (t *Customer) SetTel(tel string) {
+func (t *Customer) SetTel(tel sql.NullString) {
 	t.AddPropertyName("tel")
 	t.tel = tel
 }
-func (t *Customer) SetSalesAmount(salesAmount int64) {
+func (t *Customer) SetSalesAmount(salesAmount sql.NullInt64) {
 	t.AddPropertyName("salesAmount")
 	t.salesAmount = salesAmount
 }

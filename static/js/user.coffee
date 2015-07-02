@@ -1,5 +1,4 @@
-$c.checkAndCreate("$w")
- 
+$c.checkAndCreate("$w") 
 $w.handleChange = (e) ->
   jsx=$w.app
   $c.handleChange(jsx,e.target.name,e.target.value);

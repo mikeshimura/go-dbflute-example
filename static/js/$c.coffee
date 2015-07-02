@@ -26,8 +26,8 @@ $c.actions =
     this.dispatch($c.constants.$C_ALERT_SHOW,message)
   $c_alertHide:() ->
     this.dispatch($c.constants.$C_ALERT_HIDE)
-  $c_deleteCfmShow:() ->
-    this.dispatch($c.constants.$C_DELETE_CFM_SHOW)
+  $c_deleteCfmShow:(callback) ->
+    this.dispatch($c.constants.$C_DELETE_CFM_SHOW,callback)
   $c_deleteCfmHide:() ->
     this.dispatch($c.constants.$C_DELETE_CFM_HIDE)
 LoginClient =
@@ -45,6 +45,7 @@ $c.CommonStore = Fluxxor.createStore(
         deleteCfm:
           {
             isShow:false
+            callback:null
           }
         loading:false
       }
@@ -64,8 +65,9 @@ $c.CommonStore = Fluxxor.createStore(
     @data.alert.isShow = false
     @emit "change"
     return
-  onDeleteCfmShow: ()->
+  onDeleteCfmShow: (callback)->
     @data.deleteCfm.isShow = true
+    @data.deleteCfm.callback = callback
     @emit "change"
     return
   onDeleteCfmHide: () ->
@@ -147,11 +149,12 @@ $c.rcdConstants =
   $C_RCD_DELETE_SUCCESS: "$C_RCD_DELETE_SUCCESS"
   $C_RCD_TRANSACTIONS_SUCCESS: "$C_RCD_TRANSACTIONS_SUCCESS"
 $c.rcdActions = {
-  $c_rcd_fetch: (rcdData,form,table,criteria)->
+  $c_rcd_fetch: (rcdData,form,table,criteria,maxRecord)->
     params = {
       operationType: "fetch"
       data:{
         criteria:criteria
+        maxRecord:maxRecord
       }
     }
     context={

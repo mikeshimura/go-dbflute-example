@@ -291,6 +291,18 @@ func (q *CustomerCQ) SetAddr_NotLikeSearch(value string, option *df.LikeSearchOp
 
 
 
+func (q *CustomerCQ) SetAddr_IsNull() *CustomerCQ {
+	q.regAddr(df.CK_ISN_C, 0)
+	return q
+}
+func (q *CustomerCQ) SetAddr_IsNullOrEmpty() *CustomerCQ {
+	q.regAddr(df.CK_ISNOE_C, 0)
+	return q
+}
+func (q *CustomerCQ) SetAddr_IsNotNull() *CustomerCQ {
+	q.regAddr(df.CK_ISNN_C, 0)
+	return q
+}
 func (q *CustomerCQ) AddOrderBy_Addr_Asc() *CustomerCQ {
 	q.BaseConditionQuery.RegOBA("addr")
 	return q
@@ -360,6 +372,18 @@ func (q *CustomerCQ) SetBldg_NotLikeSearch(value string, option *df.LikeSearchOp
 
 
 
+func (q *CustomerCQ) SetBldg_IsNull() *CustomerCQ {
+	q.regBldg(df.CK_ISN_C, 0)
+	return q
+}
+func (q *CustomerCQ) SetBldg_IsNullOrEmpty() *CustomerCQ {
+	q.regBldg(df.CK_ISNOE_C, 0)
+	return q
+}
+func (q *CustomerCQ) SetBldg_IsNotNull() *CustomerCQ {
+	q.regBldg(df.CK_ISNN_C, 0)
+	return q
+}
 func (q *CustomerCQ) AddOrderBy_Bldg_Asc() *CustomerCQ {
 	q.BaseConditionQuery.RegOBA("bldg")
 	return q
@@ -429,6 +453,18 @@ func (q *CustomerCQ) SetCusConSec_NotLikeSearch(value string, option *df.LikeSea
 
 
 
+func (q *CustomerCQ) SetCusConSec_IsNull() *CustomerCQ {
+	q.regCusConSec(df.CK_ISN_C, 0)
+	return q
+}
+func (q *CustomerCQ) SetCusConSec_IsNullOrEmpty() *CustomerCQ {
+	q.regCusConSec(df.CK_ISNOE_C, 0)
+	return q
+}
+func (q *CustomerCQ) SetCusConSec_IsNotNull() *CustomerCQ {
+	q.regCusConSec(df.CK_ISNN_C, 0)
+	return q
+}
 func (q *CustomerCQ) AddOrderBy_CusConSec_Asc() *CustomerCQ {
 	q.BaseConditionQuery.RegOBA("cusConSec")
 	return q
@@ -498,6 +534,18 @@ func (q *CustomerCQ) SetCusConName_NotLikeSearch(value string, option *df.LikeSe
 
 
 
+func (q *CustomerCQ) SetCusConName_IsNull() *CustomerCQ {
+	q.regCusConName(df.CK_ISN_C, 0)
+	return q
+}
+func (q *CustomerCQ) SetCusConName_IsNullOrEmpty() *CustomerCQ {
+	q.regCusConName(df.CK_ISNOE_C, 0)
+	return q
+}
+func (q *CustomerCQ) SetCusConName_IsNotNull() *CustomerCQ {
+	q.regCusConName(df.CK_ISNN_C, 0)
+	return q
+}
 func (q *CustomerCQ) AddOrderBy_CusConName_Asc() *CustomerCQ {
 	q.BaseConditionQuery.RegOBA("cusConName")
 	return q
@@ -567,6 +615,18 @@ func (q *CustomerCQ) SetTel_NotLikeSearch(value string, option *df.LikeSearchOpt
 
 
 
+func (q *CustomerCQ) SetTel_IsNull() *CustomerCQ {
+	q.regTel(df.CK_ISN_C, 0)
+	return q
+}
+func (q *CustomerCQ) SetTel_IsNullOrEmpty() *CustomerCQ {
+	q.regTel(df.CK_ISNOE_C, 0)
+	return q
+}
+func (q *CustomerCQ) SetTel_IsNotNull() *CustomerCQ {
+	q.regTel(df.CK_ISNN_C, 0)
+	return q
+}
 func (q *CustomerCQ) AddOrderBy_Tel_Asc() *CustomerCQ {
 	q.BaseConditionQuery.RegOBA("tel")
 	return q
@@ -628,6 +688,14 @@ func (q *CustomerCQ) SetSalesAmount_RangeOf(minNumber int64, maxNumber int64, ra
 }	
 
 
+func (q *CustomerCQ) SetSalesAmount_IsNull() *CustomerCQ {
+	q.regSalesAmount(df.CK_ISN_C, 0)
+	return q
+}
+func (q *CustomerCQ) SetSalesAmount_IsNotNull() *CustomerCQ {
+	q.regSalesAmount(df.CK_ISNN_C, 0)
+	return q
+}
 func (q *CustomerCQ) AddOrderBy_SalesAmount_Asc() *CustomerCQ {
 	q.BaseConditionQuery.RegOBA("salesAmount")
 	return q

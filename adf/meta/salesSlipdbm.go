@@ -32,16 +32,6 @@ type SalesSlipDbm_T struct {
 func (b *SalesSlipDbm_T) GetProjectName() string {
 	return df.DBCurrent_I.ProjectName
 }
-func (b *SalesSlipDbm_T) foreignCustomer() *df.ForeignInfo {
-	columns := []*df.ColumnInfo{
-		SalesSlipDbm.GetColumnInfoByPropertyName("cusId"),
-		CustomerDbm.GetColumnInfoByPropertyName("id"),
-	}
-
-	return b.BaseDBMeta.Cfi("sales_slip_cus_fkey", "Customer",
-		columns, 0, false, false, false, false,
-		"", nil, false, "salesSlipList")
-}	
 func (b *SalesSlipDbm_T) foreignProduct() *df.ForeignInfo {
 	columns := []*df.ColumnInfo{
 		SalesSlipDbm.GetColumnInfoByPropertyName("prdId"),
@@ -49,7 +39,7 @@ func (b *SalesSlipDbm_T) foreignProduct() *df.ForeignInfo {
 	}
 
 	return b.BaseDBMeta.Cfi("sales_slip_product_fkey", "Product",
-		columns, 1, false, false, false, false,
+		columns, 0, false, false, false, false,
 		"", nil, false, "salesSlipList")
 }	
 func (b *SalesSlipDbm_T) foreignEmployee() *df.ForeignInfo {
@@ -59,12 +49,11 @@ func (b *SalesSlipDbm_T) foreignEmployee() *df.ForeignInfo {
 	}
 
 	return b.BaseDBMeta.Cfi("sales_slip_sales_id_fkey", "Employee",
-		columns, 2, false, false, false, false,
+		columns, 1, false, false, false, false,
 		"", nil, false, "salesSlipList")
 }	
 func (b *SalesSlipDbm_T) CreateForeignInfoMap() {
 	b.ForeignInfoMap = make(map[string]*df.ForeignInfo)
-	b.ForeignInfoMap["Customer"] = b.foreignCustomer()
 	b.ForeignInfoMap["Product"] = b.foreignProduct()
 	b.ForeignInfoMap["Employee"] = b.foreignEmployee()
 }
@@ -122,7 +111,7 @@ func Create_SalesSlipDbm() {
 	cusIdSqlName.IrregularChar = false
 	SalesSlipDbm.ColumnCusId = df.CCI(&salesSlip, "cus_id", cusIdSqlName, "", "",
                "Integer.class", "cusId", "", false, false,true, "int4", 10, 0,
-               "",false,"","", "customer","","",false,"int64")
+               "",false,"","", "","","",false,"int64")
 	prdIdSqlName := new(df.ColumnSqlName)
 	prdIdSqlName.ColumnSqlName = "prd_id"
 	prdIdSqlName.IrregularChar = false
