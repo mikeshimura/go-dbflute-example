@@ -68,6 +68,13 @@ func init() {
 	var sysTable df.Behavior =SysTableBhv_I
 	SysTableBhv_I.BaseBehavior.Behavior=&sysTable
 	SysTableBhv_I.BaseBehavior.BehaviorCommandInvoker = df.Bci
+	TestTableBhv_I = new(TestTableBhv)
+	TestTableBhv_I.BaseBehavior = new(df.BaseBehavior)
+	TestTableBhv_I.BaseBehavior.CreateBehaviorCommandInvoker()
+	TestTableBhv_I.BaseBehavior.TableDbName = "TestTable"
+	var testTable df.Behavior =TestTableBhv_I
+	TestTableBhv_I.BaseBehavior.Behavior=&testTable
+	TestTableBhv_I.BaseBehavior.BehaviorCommandInvoker = df.Bci
 	UserTableBhv_I = new(UserTableBhv)
 	UserTableBhv_I.BaseBehavior = new(df.BaseBehavior)
 	UserTableBhv_I.BaseBehavior.CreateBehaviorCommandInvoker()

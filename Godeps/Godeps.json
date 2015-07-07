@@ -43,15 +43,15 @@
 		},
 		{
 			"ImportPath": "github.com/mikeshimura/dbflute/df",
-			"Rev": "421d00accd3040d577f63f35142207d40d67baec"
+			"Rev": "41e539e2792ad0bcb951988185bd972db9bc6958"
 		},
 		{
 			"ImportPath": "github.com/mikeshimura/dbflute/log",
-			"Rev": "421d00accd3040d577f63f35142207d40d67baec"
+			"Rev": "41e539e2792ad0bcb951988185bd972db9bc6958"
 		},
 		{
 			"ImportPath": "github.com/mikeshimura/dfweb",
-			"Rev": "47e07c8d767c76035e94b92d30f2ec000339664c"
+			"Rev": "2bb16dad857bd3e749a083c422315c792febb667"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",

@@ -53,6 +53,12 @@ func EntityInit() {
 		return &te
 	}
 	df.BhvUtil_I.AddEntity("SysTable", SysTable)
+	TestTable := func() *df.Entity {
+		var te df.Entity = new(TestTable)
+		te.SetUp()
+		return &te
+	}
+	df.BhvUtil_I.AddEntity("TestTable", TestTable)
 	UserTable := func() *df.Entity {
 		var te df.Entity = new(UserTable)
 		te.SetUp()

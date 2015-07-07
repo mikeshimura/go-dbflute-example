@@ -81,6 +81,15 @@ func CustomerinHtml(c *gin.Context) {
 	css := []string{"/css/bootstrap.css", "/css/main.css"}
 	GenerateAuthorizedScreen(c, title, js, jslib, css, []string{})
 }
+
+func TestTableHtml(c *gin.Context) {
+	title := "TEST TABLE 管理"
+	js := []string{"/js/$c.js", "/js/$v.js", "/js/testtable.js", "/js/_cjsx.js", "/js/testtablejsx.js"}
+	jslib := []string{"/js/lib/fluxxor.js", "/js/lib/react.js", "/js/lib/react-bootstrap.js",
+		"/js/lib/jquery-1.11.1.js", "/js/lib/lodash.js"}
+	css := []string{"/css/bootstrap.css", "/css/main.css"}
+	GenerateAuthorizedScreen(c, title, js, jslib, css, []string{})
+}
 func GenerateAuthorizedScreen(
 	c *gin.Context, title string, js []string, jslib []string, css []string, script []string) {
 	defer func() {

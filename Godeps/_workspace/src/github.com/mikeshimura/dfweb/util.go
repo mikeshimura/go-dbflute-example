@@ -450,7 +450,7 @@ func ConvFromWebDataForInvoke(
 			if err != nil {
 				panic("Timeに変換出来ません。：" + arg.(string))
 			}
-			return res
+			return df.CreateDate(res)
 		}
 	case "df.NullTimestamp":
 		switch argType {
@@ -464,7 +464,7 @@ func ConvFromWebDataForInvoke(
 			if err != nil {
 				panic("Timestampに変換出来ません。：" + args)
 			}
-			return res
+			return df.CreateTimestamp(res)
 		}
 	}
 
@@ -699,7 +699,7 @@ func GetOpMap2() map[string]string {
 }
 func SetCriteria(query interface{}, emap map[string]interface{}, table string) {
 	meta := df.DBMetaProvider_I.TableDbNameInstanceMap[table]
-	//fmt.Printf("table %s meta %v\n",table,meta)
+	fmt.Printf("table %s meta %v\n",table,meta)
 	opMap := GetOpMap()
 	opMap2 := GetOpMap2()
 	field := (emap["fieldName"]).(string)
@@ -707,7 +707,7 @@ func SetCriteria(query interface{}, emap map[string]interface{}, table string) {
 	if colInfo==nil{
 		panic("ColInfo Not found :"+field)
 	}
-	//fmt.Printf("colInfo %v gotype %v\n",colInfo,colInfo.GoType)
+//	fmt.Printf("colInfo %v gotype %v\n",colInfo,colInfo.GoType)
 	operator := (emap["operator"]).(string)
 	op := opMap[operator]
 	setter := "Set" + df.InitCap(field) + "_" + op

@@ -25,6 +25,7 @@ func main() {
 	r.GET("/customer", web.CustomerHtml)
 	r.GET("/customert", web.CustomertHtml)
 	r.GET("/customerin", web.CustomerinHtml)
+	r.GET("/testtable", web.TestTableHtml)
 	ajax := r.Group("/ajax")
 
 	{
@@ -35,6 +36,7 @@ func main() {
 		ajax.POST("/systbl", web.SysTableExec)
 		ajax.POST("/employee", web.EmployeeExec)
 		ajax.POST("/customer", web.CustomerExec)
+		ajax.POST("/testtable", web.TestTableExec)
 	}
 	r.Static("/static", "./static")
 	r.Run(":" + os.Getenv("PORT"))

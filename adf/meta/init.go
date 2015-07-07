@@ -37,6 +37,10 @@ func MetaInit() {
 	var SysTable_meta df.DBMeta = SysTableDbm
 	df.DBMetaProvider_I.TableDbNameInstanceMap["SysTable"] = &SysTable_meta
 	df.DBMetaProvider_I.TableDbNameFlexibleMap.Put("SysTable", "SysTable")
+	Create_TestTableDbm()
+	var TestTable_meta df.DBMeta = TestTableDbm
+	df.DBMetaProvider_I.TableDbNameInstanceMap["TestTable"] = &TestTable_meta
+	df.DBMetaProvider_I.TableDbNameFlexibleMap.Put("TestTable", "TestTable")
 	Create_UserTableDbm()
 	var UserTable_meta df.DBMeta = UserTableDbm
 	df.DBMetaProvider_I.TableDbNameInstanceMap["UserTable"] = &UserTable_meta
