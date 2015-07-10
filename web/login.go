@@ -1,7 +1,7 @@
 package web
 
 import (
-	"code.google.com/p/go-uuid/uuid"
+	"github.com/pborman/uuid"
 	"database/sql"
 	//"fmt"
 	"github.com/gin-gonic/gin"
