@@ -8,13 +8,21 @@ import (
 	"godbfexam/util"
 	"godbfexam/web"
 	"os"
+	"strings"
 )
 
 func main() {
 	df.DISP_SQL_DEFAULT_TIMESTAMP_FORMAT = "2006/01/02 15:04:05"
 	df.DISP_SQL_DEFAULT_DATE_FORMAT = "2006/01/02"
 	log.SetCharCode("utf-8")
-	util.Sslmode = "disable"
+	url := os.Getenv("DATABASE_URL")
+	if strings.Contains(url, "localhost") {
+		util.Sslmode = "disable"
+		log.DebugConv("main","Sslmode:disable")
+	} else {
+		util.Sslmode = "require"
+		log.DebugConv("main","Sslmode:require")
+	}
 	r := gin.Default()
 	r.GET("/", web.IndexHtml)
 	r.GET("/user", web.UserHtml)
