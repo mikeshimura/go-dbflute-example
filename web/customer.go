@@ -12,9 +12,9 @@ import (
 )
 
 func CustomerExec(c *gin.Context) {
-	usertable := new(Customer)
-	usertable.context = c
-	usertable.Exec()
+	table := new(Customer)
+	table.context = c
+	table.Exec()
 }
 
 type Customer struct {
@@ -213,5 +213,5 @@ func (p *Customer) DupCheck(entityx *entity.Customer) bool {
 	if err != nil {
 		panic(err.Error())
 	}
-	return res.AllRecordCount == 1
+	return res.AllRecordCount > 0
 }

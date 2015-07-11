@@ -102,7 +102,7 @@ $w.Application = React.createClass({
             width:$w.width,height:$w.height,backgroundColor: "#F0F0F0"}}>
       <b.Row className="darkBgLarge"
           style={{margin:0,height:40,lineHeight:"40px",verticalAlign: "middle"}}>
-        <b.Col xs={5} style={{textAlign: "center"}}>TEST TABLE ç®¡ç†
+        <b.Col xs={5} style={{textAlign: "center"}}>TEST TABLE ŠÇ—
         </b.Col>
         <b.Col xs={5} className="darkBgMid" style={{textAlign: "center"}}>
         {this.state.user}
@@ -115,7 +115,7 @@ $w.Application = React.createClass({
       </b.Row>
       <b.Row style={{margin:5}}>
       <b.Button bsSize="xsmall" bsStyle="primary" onClick={$w.handleClick}
-        name="btntesttable_Search" style={{width:60,marginLeft:10}}>æ¤œç´¢</b.Button>
+        name="btntesttable_Search" style={{width:60,marginLeft:10}}>ŒŸõ</b.Button>
       </b.Row>
 
       <b.Row style={{verticalAlign:"middle", lineHeight:"26px",marginLeft:0}}>
@@ -240,11 +240,11 @@ $w.Application = React.createClass({
       </div>
       <b.Row style={{margin:5}}>
         <b.Button bsSize="xsmall" bsStyle="primary" onClick={$w.handleClick}
-            name="btntesttable_New" style={{width:60,marginLeft:10}}>æ–°è¦</b.Button>
+            name="btntesttable_New" style={{width:60,marginLeft:10}}>V‹K</b.Button>
         <b.Button bsSize="xsmall" bsStyle="primary" onClick={$w.handleClick}
-            name="btntesttable_Update" style={{width:60,marginLeft:10}}>æ›´æ–°</b.Button>
+            name="btntesttable_Update" style={{width:60,marginLeft:10}}>XV</b.Button>
         <b.Button bsSize="xsmall" bsStyle="primary" onClick={$w.handleClick}
-            name="btntesttable_Delete" style={{width:60,marginLeft:10}}>å‰Šé™¤</b.Button>
+            name="btntesttable_Delete" style={{width:60,marginLeft:10}}>íœ</b.Button>
 
       </b.Row>
       <b.Row style={{verticalAlign:"middle", lineHeight:"26px",marginLeft:0,marginRight:5}}>
@@ -289,7 +289,7 @@ $w.Application = React.createClass({
           <b.Col xs={3}>
           <b.Input type="text" value={this.state.testtable_form.id}
             name="testtable_form#id" onChange={$w.handleChange}
-            disabled
+            disable
             style={{height:24,fontSize:12,width:"100%"}}/>
           </b.Col>
       </b.Row>
@@ -299,7 +299,7 @@ $w.Application = React.createClass({
           <b.Col xs={3}>
           <b.Input type="text" value={this.state.testtable_form.versionNo}
             name="testtable_form#versionNo" onChange={$w.handleChange}
-            disabled
+            disable
             style={{height:24,fontSize:12,width:"100%"}}/>
           </b.Col>
       </b.Row>

@@ -226,5 +226,5 @@ func (p *Employee) DupCheck(entityx *entity.Employee) bool {
 	if err != nil {
 		panic(err.Error())
 	}
-	return res.AllRecordCount == 1
+	return res.AllRecordCount >= 0
 }

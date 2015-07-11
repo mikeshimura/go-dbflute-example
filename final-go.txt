@@ -47,7 +47,7 @@ func (p *TestTable) Exec() {
 	case "remove":
 		p.Delete(id)
 	default:
-		panic("TestTable operationType が無効です。 :" + operationType)
+		panic("TestTable operationType �������ł��B :" + operationType)
 	}
 }
 
@@ -71,7 +71,7 @@ func (p *TestTable) Insert(data map[string]interface{}) {
 	dfweb.MapToEntity(data, &e, "TestTable", false)
 	//DupCheck
 	if p.DupCheck(entityx) {
-		panic("この TestIdは既に使用されています。")
+		panic("���� TestId�͊��Ɏg�p����Ă��܂��B")
 	}
 	_, err := bhv.TestTableBhv_I.Insert(entityx, p.tx, p.ctx)
 	if err != nil {
@@ -91,7 +91,7 @@ func (p *TestTable) Update(data map[string]interface{}) {
 	old=old
 	if (entityx.GetTestId() != old.GetTestId() &&
 		p.DupCheck(entityx)) {
-		panic("この TestIdは既に使用されています。")
+		panic("���� TestId�͊��Ɏg�p����Ă��܂��B")
 	}
 	_, err := bhv.TestTableBhv_I.Update(entityx, p.tx, p.ctx)
 	if err != nil {

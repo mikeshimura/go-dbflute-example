@@ -203,5 +203,5 @@ func (p *SysTable) DupCheck(entityx *entity.SysTable) bool {
 	if err != nil {
 		panic(err.Error())
 	}
-	return res.AllRecordCount == 1
+	return res.AllRecordCount > 0
 }

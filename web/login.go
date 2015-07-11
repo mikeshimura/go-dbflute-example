@@ -152,7 +152,7 @@ func(p *Login)  DupCheck(entity *entity.Login) bool {
 	if err != nil {
 		panic(err.Error())
 	}
-	return res.AllRecordCount == 1
+	return res.AllRecordCount > 0
 }
 func (p *Login) SetupCriteria(cbx *cb.LoginCB, data map[string]interface{}) {
 	if data == nil {

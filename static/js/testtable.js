@@ -21,63 +21,63 @@
       $w.flux.actions.$c_deleteCfmHide();
       $w.app.state.common.deleteCfm.callback();
     }
-    if (name === "btntestTable_New") {
-      $w.testTable_formClear();
+    if (name === "btntesttable_New") {
+      $w.testtable_formClear();
     }
-    if (name === "btntestTable_Search") {
-      $w.testTable_formSearch();
+    if (name === "btntesttable_Search") {
+      $w.testtable_formSearch();
     }
-    if (name === "btntestTable_Update") {
-      $w.testTable_formUpdate();
+    if (name === "btntesttable_Update") {
+      $w.testtable_formUpdate();
     }
-    if (name === "btntestTable_Delete") {
-      $w.testTable_formDelete();
+    if (name === "btntesttable_Delete") {
+      $w.testtable_formDelete();
     }
     if (typeof e.target.id === "undefined") {
       return;
     }
     ids = e.target.id.split("#");
-    if (ids[0] === "testTable_row") {
+    if (ids[0] === "testtable_row") {
       temp = {
-        testTable: $w.app.state.testTable
+        testtable: $w.app.state.testtable
       };
       selRow = Number(ids[2]);
-      temp.testTable.selRow = selRow;
-      temp.testTable_form = _.cloneDeep(temp.testTable.rcds[selRow]);
+      temp.testtable.selRow = selRow;
+      temp.testtable_form = _.cloneDeep(temp.testtable.rcds[selRow]);
       return $w.app.setState(temp);
     }
   };
 
-  $w.testTable_formSearch = function() {
+  $w.testtable_formSearch = function() {
     var criteria, maxRecord;
-    criteria = $c.createCriteria($w.app.state.testTable_search, ["testId", "testDate", "testTimestamp", "testNbr"]);
-    maxRecord = $w.app.state.testTable_search.maxRecord;
-    return $w.flux.actions.$c_rcd_fetch($w.app.state.testTable, $w.app.state.testTable_form, "testTable", criteria, maxRecord);
+    criteria = $c.createCriteria($w.app.state.testtable_search, ["testId", "testDate", "testTimestamp", "testNbr"]);
+    maxRecord = $w.app.state.testtable_search.maxRecord;
+    return $w.flux.actions.$c_rcd_fetch($w.app.state.testtable, $w.app.state.testtable_form, "testtable", criteria, maxRecord);
   };
 
-  $w.testTable_formUpdate = function() {
-    return $w.flux.actions.$c_rcd_update($w.app.state.testTable, $w.app.state.testTable_form, "testTable");
+  $w.testtable_formUpdate = function() {
+    return $w.flux.actions.$c_rcd_update($w.app.state.testtable, $w.app.state.testtable_form, "testtable");
   };
 
-  $w.testTable_formDelete = function() {
-    if ($w.app.state.testTable_form.id === "") {
+  $w.testtable_formDelete = function() {
+    if ($w.app.state.testtable_form.id === "") {
       $w.flux.actions.$c_rcd_delete_id_blank();
       return;
     }
-    return $w.flux.actions.$c_deleteCfmShow($w.testTable_formDeleteCfm);
+    return $w.flux.actions.$c_deleteCfmShow($w.testtable_formDeleteCfm);
   };
 
-  $w.testTable_formDeleteCfm = function() {
-    return $w.flux.actions.$c_rcd_delete($w.app.state.testTable, $w.app.state.testTable_form, "testTable");
+  $w.testtable_formDeleteCfm = function() {
+    return $w.flux.actions.$c_rcd_delete($w.app.state.testtable, $w.app.state.testtable_form, "testtable");
   };
 
-  $w.testTable_formClear = function() {
+  $w.testtable_formClear = function() {
     var formtemp;
     formtemp = {
-      testTable_form: _.cloneDeep($w.app.state.testTable.blank),
-      testTable: $w.app.state.testTable
+      testtable_form: _.cloneDeep($w.app.state.testtable.blank),
+      testtable: $w.app.state.testtable
     };
-    formtemp.testTable.selRow = -1;
+    formtemp.testtable.selRow = -1;
     return $w.app.setState(formtemp);
   };
 
@@ -115,21 +115,21 @@
 
   rcdStore = $w.flux.store("RCD");
 
-  rcdStore.addTable("testTable");
+  rcdStore.addTable("testtable");
 
   $w.FluxMixin = Fluxxor.FluxMixin(React);
 
   $w.StoreWatchMixin = Fluxxor.StoreWatchMixin;
 
-  $w.rcdStore.on("rcdComplete_testTable", function() {
+  $w.rcdStore.on("rcdComplete_testtable", function() {
     var rcdTemp, temp;
-    rcdTemp = _.cloneDeep($w.app.state.rcd.testTable);
+    rcdTemp = _.cloneDeep($w.app.state.rcd.testtable);
     temp = {
-      testTable: $w.app.state.testTable
+      testtable: $w.app.state.testtable
     };
-    temp.testTable.rcds = rcdTemp.rcds;
-    temp.testTable_form = rcdTemp.rcd;
-    temp.testTable.selRow = rcdTemp.selRow;
+    temp.testtable.rcds = rcdTemp.rcds;
+    temp.testtable_form = rcdTemp.rcd;
+    temp.testtable.selRow = rcdTemp.selRow;
     return $w.app.setState(temp);
   });
 
@@ -137,12 +137,12 @@
     return $w.app.refs[refname].getDOMNode();
   };
 
-  $w.testTable_scroll = function() {
-    return $w.getDom("testTable_tableHead").scrollLeft = $w.getDom("testTable_tableBody").scrollLeft;
+  $w.testtable_scroll = function() {
+    return $w.getDom("testtable_tableHead").scrollLeft = $w.getDom("testtable_tableBody").scrollLeft;
   };
 
-  $w.testTable_onscroll = function() {
-    return $w.getDom("testTable_tableBody").onscroll = $w.testTable_scroll;
+  $w.testtable_onscroll = function() {
+    return $w.getDom("testtable_tableBody").onscroll = $w.testtable_scroll;
   };
 
 }).call(this);

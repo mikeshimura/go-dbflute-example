@@ -5,7 +5,7 @@ $w.width=900;
 $w.height=800;
 $w.tableHeight=340;
 $w.tableColW={c1:50,c2:90,c3:120,c4:50,c5:50,c6:50}
-$w.testTableRows = React.createClass({displayName: 'testTableRows',
+$w.testtableRows = React.createClass({displayName: 'testtableRows',
 
     render: function() {
         var rows = this.props.rcds.map(function(rcd, i){
@@ -19,17 +19,17 @@ $w.testTableRows = React.createClass({displayName: 'testTableRows',
             bgcolor="#FFFFFF";
         return (
           React.createElement("tr", {key: i}, 
- React.createElement("td", {id: "testTable_row#testId#"+i, 
+ React.createElement("td", {id: "testtable_row#testId#"+i, 
             style: {width:this.props.cw.c1,backgroundColor:bgcolor,textAlign:"left"}}, rcd.testId), 
- React.createElement("td", {id: "testTable_row#testDate#"+i, 
+ React.createElement("td", {id: "testtable_row#testDate#"+i, 
             style: {width:this.props.cw.c2,backgroundColor:bgcolor,textAlign:"left"}}, rcd.testDate), 
- React.createElement("td", {id: "testTable_row#testTimestamp#"+i, 
+ React.createElement("td", {id: "testtable_row#testTimestamp#"+i, 
             style: {width:this.props.cw.c3,backgroundColor:bgcolor,textAlign:"left"}}, rcd.testTimestamp), 
- React.createElement("td", {id: "testTable_row#testNbr#"+i, 
+ React.createElement("td", {id: "testtable_row#testNbr#"+i, 
             style: {width:this.props.cw.c4,backgroundColor:bgcolor,textAlign:"right"}}, rcd.testNbr), 
- React.createElement("td", {id: "testTable_row#id#"+i, 
+ React.createElement("td", {id: "testtable_row#id#"+i, 
             style: {width:this.props.cw.c5,backgroundColor:bgcolor,textAlign:"right"}}, rcd.id), 
- React.createElement("td", {id: "testTable_row#versionNo#"+i, 
+ React.createElement("td", {id: "testtable_row#versionNo#"+i, 
             style: {width:this.props.cw.c6,backgroundColor:bgcolor,textAlign:"right"}}, rcd.versionNo)
 
          )
@@ -46,7 +46,7 @@ $w.Application = React.createClass({displayName: 'Application',
   mixins: [$w.FluxMixin, $w.StoreWatchMixin("PAGE","COMMON","RCD")],
   getInitialState: function() {
   $w.app = this;
-  testTable_blank={
+  testtable_blank={
           testId:"",
           testDate:"",
           testTimestamp:"",
@@ -57,7 +57,7 @@ $w.Application = React.createClass({displayName: 'Application',
   };
       return {
                 user:$c.login.name,
-                testTable_search:{
+                testtable_search:{
                   maxRecord:"300",
 
                   testId:"starts with",
@@ -73,15 +73,15 @@ $w.Application = React.createClass({displayName: 'Application',
                   testNbr_s:"",
                   testNbr_e:"",
                 },
-                testTable:{
-                  url:"/ajax/testTable",
+                testtable:{
+                  url:"/ajax/testtable",
                   cw:$w.tableColW,
                   totalW:$c.totalW($w.tableColW)+2,
                   rcds:[],
-                  blank:_.cloneDeep(testTable_blank),
+                  blank:_.cloneDeep(testtable_blank),
                   selRow:-1
                 },
-                testTable_form:_.cloneDeep(testTable_blank)
+                testtable_form:_.cloneDeep(testtable_blank)
               };
   },
   getStateFromFlux: function() {
@@ -102,7 +102,7 @@ $w.Application = React.createClass({displayName: 'Application',
             width:$w.width,height:$w.height,backgroundColor: "#F0F0F0"}}, 
       React.createElement(b.Row, {className: "darkBgLarge", 
           style: {margin:0,height:40,lineHeight:"40px",verticalAlign: "middle"}}, 
-        React.createElement(b.Col, {xs: 5, style: {textAlign: "center"}}, "TEST"
+        React.createElement(b.Col, {xs: 5, style: {textAlign: "center"}}, "TEST TABLE 管理"
         ), 
         React.createElement(b.Col, {xs: 5, className: "darkBgMid", style: {textAlign: "center"}}, 
         this.state.user
@@ -115,7 +115,7 @@ $w.Application = React.createClass({displayName: 'Application',
       ), 
       React.createElement(b.Row, {style: {margin:5}}, 
       React.createElement(b.Button, {bsSize: "xsmall", bsStyle: "primary", onClick: $w.handleClick, 
-        name: "btntestTable_Search", style: {width:60,marginLeft:10}}, "検索")
+        name: "btntesttable_Search", style: {width:60,marginLeft:10}}, "検索")
       ), 
 
       React.createElement(b.Row, {style: {verticalAlign:"middle", lineHeight:"26px",marginLeft:0}}, 
@@ -123,25 +123,25 @@ $w.Application = React.createClass({displayName: 'Application',
           ), 
           React.createElement(b.Col, {xs: 2}, 
           React.createElement($c.SelectOption, {options: $c.stringOption, style: {height:24,  fontSize:12}, 
-               name: "testTable_search#testId", 
-              defaultValue: this.state.testTable_search.testId, onChange: $w.handleChange})
+               name: "testtable_search#testId", 
+              defaultValue: this.state.testtable_search.testId, onChange: $w.handleChange})
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_search.testId_s, 
-            name: "testTable_search#testId_s", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_search.testId_s, 
+            name: "testtable_search#testId_s", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_search.testId_e, 
-            name: "testTable_search#testId_e", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_search.testId_e, 
+            name: "testtable_search#testId_e", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           ), 
 
           React.createElement(b.Col, {xs: 1, style: {textAlign: "right"}}, "MaxRecord"
           ), 
           React.createElement(b.Col, {xs: 1}, 
-            React.createElement(b.Input, {type: "text", value: this.state.testTable_search.maxRecord, 
-            name: "testTable_search#maxRecord", onChange: $w.handleChange, 
+            React.createElement(b.Input, {type: "text", value: this.state.testtable_search.maxRecord, 
+            name: "testtable_search#maxRecord", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           )
       ), 
@@ -151,17 +151,17 @@ $w.Application = React.createClass({displayName: 'Application',
           ), 
           React.createElement(b.Col, {xs: 2}, 
           React.createElement($c.SelectOption, {options: $c.numberOption, style: {height:24,  fontSize:12}, 
-               name: "testTable_search#testDate", 
-              defaultValue: this.state.testTable_search.testDate, onChange: $w.handleChange})
+               name: "testtable_search#testDate", 
+              defaultValue: this.state.testtable_search.testDate, onChange: $w.handleChange})
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_search.testDate_s, 
-            name: "testTable_search#testDate_s", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_search.testDate_s, 
+            name: "testtable_search#testDate_s", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_search.testDate_e, 
-            name: "testTable_search#testDate_e", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_search.testDate_e, 
+            name: "testtable_search#testDate_e", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           )
 
@@ -172,17 +172,17 @@ $w.Application = React.createClass({displayName: 'Application',
           ), 
           React.createElement(b.Col, {xs: 2}, 
           React.createElement($c.SelectOption, {options: $c.numberOption, style: {height:24,  fontSize:12}, 
-               name: "testTable_search#testTimestamp", 
-              defaultValue: this.state.testTable_search.testTimestamp, onChange: $w.handleChange})
+               name: "testtable_search#testTimestamp", 
+              defaultValue: this.state.testtable_search.testTimestamp, onChange: $w.handleChange})
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_search.testTimestamp_s, 
-            name: "testTable_search#testTimestamp_s", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_search.testTimestamp_s, 
+            name: "testtable_search#testTimestamp_s", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_search.testTimestamp_e, 
-            name: "testTable_search#testTimestamp_e", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_search.testTimestamp_e, 
+            name: "testtable_search#testTimestamp_e", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           )
 
@@ -193,17 +193,17 @@ $w.Application = React.createClass({displayName: 'Application',
           ), 
           React.createElement(b.Col, {xs: 2}, 
           React.createElement($c.SelectOption, {options: $c.numberOption, style: {height:24,  fontSize:12}, 
-               name: "testTable_search#testNbr", 
-              defaultValue: this.state.testTable_search.testNbr, onChange: $w.handleChange})
+               name: "testtable_search#testNbr", 
+              defaultValue: this.state.testtable_search.testNbr, onChange: $w.handleChange})
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_search.testNbr_s, 
-            name: "testTable_search#testNbr_s", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_search.testNbr_s, 
+            name: "testtable_search#testNbr_s", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_search.testNbr_e, 
-            name: "testTable_search#testNbr_e", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_search.testNbr_e, 
+            name: "testtable_search#testNbr_e", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           )
 
@@ -211,48 +211,48 @@ $w.Application = React.createClass({displayName: 'Application',
 
       React.createElement("div", {style: {width:$w.width-2,border:1,borderStyle:"solid",
           borderColor:"black",height:$w.tableHeight,backgroundColor: "#FFFFFF"}}, 
-      React.createElement("div", {ref: "testTable_tableHead", 
+      React.createElement("div", {ref: "testtable_tableHead", 
           style: {width:$w.width-20,height:20,overflowX:"hidden",overflowY:"hidden"}}, 
       React.createElement(b.Table, {bordered: true, condensed: true, className: "wscrolltable"}, 
-       React.createElement("thead", {style: {width:this.state.testTable.totalW,overflowX:"hidden",overflowY:"hidden"}}, 
+       React.createElement("thead", {style: {width:this.state.testtable.totalW,overflowX:"hidden",overflowY:"hidden"}}, 
         React.createElement("tr", null, 
-          React.createElement("th", {style: {width:this.state.testTable.cw.c1}}, "testId"), 
-          React.createElement("th", {style: {width:this.state.testTable.cw.c2}}, "testDate"), 
-          React.createElement("th", {style: {width:this.state.testTable.cw.c3}}, "testTimestamp"), 
-          React.createElement("th", {style: {width:this.state.testTable.cw.c4}}, "testNbr"), 
-          React.createElement("th", {style: {width:this.state.testTable.cw.c5}}, "id"), 
-          React.createElement("th", {style: {width:this.state.testTable.cw.c6}}, "versionNo")
+          React.createElement("th", {style: {width:this.state.testtable.cw.c1}}, "testId"), 
+          React.createElement("th", {style: {width:this.state.testtable.cw.c2}}, "testDate"), 
+          React.createElement("th", {style: {width:this.state.testtable.cw.c3}}, "testTimestamp"), 
+          React.createElement("th", {style: {width:this.state.testtable.cw.c4}}, "testNbr"), 
+          React.createElement("th", {style: {width:this.state.testtable.cw.c5}}, "id"), 
+          React.createElement("th", {style: {width:this.state.testtable.cw.c6}}, "versionNo")
 
         )
       )
       )
        ), 
-      React.createElement("div", {ref: "testTable_tableBody", 
+      React.createElement("div", {ref: "testtable_tableBody", 
         style: {width:$w.width-4,height:$w.tableHeight-22,overflowX:"scroll",overflowY:"scroll"}}, 
-      React.createElement("div", {style: {width:this.state.testTable.totalW,overflowX:"hidden",overflowY:"hidden"}}, 
+      React.createElement("div", {style: {width:this.state.testtable.totalW,overflowX:"hidden",overflowY:"hidden"}}, 
       React.createElement(b.Table, {bordered: true, condensed: true, className: "wscrolltable", 
        onClick: $w.handleClick}, 
-      React.createElement($w.testTableRows, {rcds: this.state.testTable.rcds, cw: this.state.testTable.cw, 
-          selRow: this.state.testTable.selRow})
+      React.createElement($w.testtableRows, {rcds: this.state.testtable.rcds, cw: this.state.testtable.cw, 
+          selRow: this.state.testtable.selRow})
       )
       )
       )
       ), 
       React.createElement(b.Row, {style: {margin:5}}, 
         React.createElement(b.Button, {bsSize: "xsmall", bsStyle: "primary", onClick: $w.handleClick, 
-            name: "btntestTable_New", style: {width:60,marginLeft:10}}, "新規"), 
+            name: "btntesttable_New", style: {width:60,marginLeft:10}}, "新規"), 
         React.createElement(b.Button, {bsSize: "xsmall", bsStyle: "primary", onClick: $w.handleClick, 
-            name: "btntestTable_Update", style: {width:60,marginLeft:10}}, "更新"), 
+            name: "btntesttable_Update", style: {width:60,marginLeft:10}}, "更新"), 
         React.createElement(b.Button, {bsSize: "xsmall", bsStyle: "primary", onClick: $w.handleClick, 
-            name: "btntestTable_Delete", style: {width:60,marginLeft:10}}, "削除")
+            name: "btntesttable_Delete", style: {width:60,marginLeft:10}}, "削除")
 
       ), 
       React.createElement(b.Row, {style: {verticalAlign:"middle", lineHeight:"26px",marginLeft:0,marginRight:5}}, 
          React.createElement(b.Col, {xs: 1, style: {textAlign: "right"}}, "testId"
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_form.testId, 
-            name: "testTable_form#testId", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_form.testId, 
+            name: "testtable_form#testId", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           )
       ), 
@@ -260,8 +260,8 @@ $w.Application = React.createClass({displayName: 'Application',
          React.createElement(b.Col, {xs: 1, style: {textAlign: "right"}}, "testDate"
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_form.testDate, 
-            name: "testTable_form#testDate", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_form.testDate, 
+            name: "testtable_form#testDate", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           )
       ), 
@@ -269,8 +269,8 @@ $w.Application = React.createClass({displayName: 'Application',
          React.createElement(b.Col, {xs: 1, style: {textAlign: "right"}}, "testTimestamp"
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_form.testTimestamp, 
-            name: "testTable_form#testTimestamp", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_form.testTimestamp, 
+            name: "testtable_form#testTimestamp", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           )
       ), 
@@ -278,8 +278,8 @@ $w.Application = React.createClass({displayName: 'Application',
          React.createElement(b.Col, {xs: 1, style: {textAlign: "right"}}, "testNbr"
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_form.testNbr, 
-            name: "testTable_form#testNbr", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_form.testNbr, 
+            name: "testtable_form#testNbr", onChange: $w.handleChange, 
             style: {height:24,fontSize:12,width:"100%"}})
           )
       ), 
@@ -287,8 +287,8 @@ $w.Application = React.createClass({displayName: 'Application',
          React.createElement(b.Col, {xs: 1, style: {textAlign: "right"}}, "id"
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_form.id, 
-            name: "testTable_form#id", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_form.id, 
+            name: "testtable_form#id", onChange: $w.handleChange, 
             disabled: true, 
             style: {height:24,fontSize:12,width:"100%"}})
           )
@@ -297,8 +297,8 @@ $w.Application = React.createClass({displayName: 'Application',
          React.createElement(b.Col, {xs: 1, style: {textAlign: "right"}}, "versionNo"
           ), 
           React.createElement(b.Col, {xs: 3}, 
-          React.createElement(b.Input, {type: "text", value: this.state.testTable_form.versionNo, 
-            name: "testTable_form#versionNo", onChange: $w.handleChange, 
+          React.createElement(b.Input, {type: "text", value: this.state.testtable_form.versionNo, 
+            name: "testtable_form#versionNo", onChange: $w.handleChange, 
             disabled: true, 
             style: {height:24,fontSize:12,width:"100%"}})
           )
@@ -312,7 +312,7 @@ $w.Application = React.createClass({displayName: 'Application',
     );
   },
   componentDidMount: function() {
-    $w.testTable_onscroll();
+    $w.testtable_onscroll();
   }
 });
 
