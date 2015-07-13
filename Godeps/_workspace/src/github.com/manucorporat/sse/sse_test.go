@@ -1,7 +1,12 @@
+// Copyright 2014 Manu Martinez-Almeida.  All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
+
 package sse
 
 import (
 	"bytes"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -143,4 +148,72 @@ func TestEncodeStream(t *testing.T) {
 		Data:  "hi! dude",
 	})
 	assert.Equal(t, w.String(), "event: float\ndata: 1.5\n\nid: 123\ndata: {\"bar\":\"foo\",\"foo\":\"bar\"}\n\nid: 124\nevent: chat\ndata: hi! dude\n\n")
+}
+
+func TestRenderSSE(t *testing.T) {
+	w := httptest.NewRecorder()
+
+	err := (Event{
+		Event: "msg",
+		Data:  "hi! how are you?",
+	}).Render(w)
+
+	assert.NoError(t, err)
+	assert.Equal(t, w.Body.String(), "event: msg\ndata: hi! how are you?\n\n")
+	assert.Equal(t, w.Header().Get("Content-Type"), "text/event-stream")
+	assert.Equal(t, w.Header().Get("Cache-Control"), "no-cache")
+}
+
+func BenchmarkResponseWriter(b *testing.B) {
+	w := httptest.NewRecorder()
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		(Event{
+			Event: "new_message",
+			Data:  "hi! how are you? I am fine. this is a long stupid message!!!",
+		}).Render(w)
+	}
+}
+
+func BenchmarkFullSSE(b *testing.B) {
+	buf := new(bytes.Buffer)
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		Encode(buf, Event{
+			Event: "new_message",
+			Id:    "13435",
+			Retry: 10,
+			Data:  "hi! how are you? I am fine. this is a long stupid message!!!",
+		})
+		buf.Reset()
+	}
+}
+
+func BenchmarkNoRetrySSE(b *testing.B) {
+	buf := new(bytes.Buffer)
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		Encode(buf, Event{
+			Event: "new_message",
+			Id:    "13435",
+			Data:  "hi! how are you? I am fine. this is a long stupid message!!!",
+		})
+		buf.Reset()
+	}
+}
+
+func BenchmarkSimpleSSE(b *testing.B) {
+	buf := new(bytes.Buffer)
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		Encode(buf, Event{
+			Event: "new_message",
+			Data:  "hi! how are you? I am fine. this is a long stupid message!!!",
+		})
+		buf.Reset()
+	}
 }

@@ -5,6 +5,8 @@
 package gin
 
 import (
+	"fmt"
+	"net/http"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -12,6 +14,36 @@ import (
 
 func init() {
 	SetMode(TestMode)
+}
+
+type testStruct struct {
+	T *testing.T
+}
+
+func (t *testStruct) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	assert.Equal(t.T, req.Method, "POST")
+	assert.Equal(t.T, req.URL.Path, "/path")
+	w.WriteHeader(500)
+	fmt.Fprint(w, "hello")
+}
+
+func TestWrap(t *testing.T) {
+	router := New()
+	router.POST("/path", WrapH(&testStruct{t}))
+	router.GET("/path2", WrapF(func(w http.ResponseWriter, req *http.Request) {
+		assert.Equal(t, req.Method, "GET")
+		assert.Equal(t, req.URL.Path, "/path2")
+		w.WriteHeader(400)
+		fmt.Fprint(w, "hola!")
+	}))
+
+	w := performRequest(router, "POST", "/path")
+	assert.Equal(t, w.Code, 500)
+	assert.Equal(t, w.Body.String(), "hello")
+
+	w = performRequest(router, "GET", "/path2")
+	assert.Equal(t, w.Code, 400)
+	assert.Equal(t, w.Body.String(), "hola!")
 }
 
 func TestLastChar(t *testing.T) {
@@ -64,4 +96,31 @@ func TestJoinPaths(t *testing.T) {
 	assert.Equal(t, joinPaths("/a/", "/hola"), "/a/hola")
 	assert.Equal(t, joinPaths("/a/", "/hola/"), "/a/hola/")
 	assert.Equal(t, joinPaths("/a/", "/hola//"), "/a/hola/")
+}
+
+type bindTestStruct struct {
+	Foo string `form:"foo" binding:"required"`
+	Bar int    `form:"bar" binding:"min=4"`
+}
+
+func TestBindMiddleware(t *testing.T) {
+	var value *bindTestStruct
+	var called bool
+	router := New()
+	router.GET("/", Bind(bindTestStruct{}), func(c *Context) {
+		called = true
+		value = c.MustGet(BindKey).(*bindTestStruct)
+	})
+	performRequest(router, "GET", "/?foo=hola&bar=10")
+	assert.True(t, called)
+	assert.Equal(t, value.Foo, "hola")
+	assert.Equal(t, value.Bar, 10)
+
+	called = false
+	performRequest(router, "GET", "/?foo=hola&bar=1")
+	assert.False(t, called)
+
+	assert.Panics(t, func() {
+		Bind(&bindTestStruct{})
+	})
 }

@@ -12,7 +12,8 @@ func IndexHtml(c *gin.Context) {
 		[]string{"/js/lib/fluxxor.js", "/js/lib/react.js", "/js/lib/react-bootstrap.js",
 			"/js/lib/jquery-1.11.1.js", "/js/lib/lodash.js"},
 		[]string{"/css/bootstrap.css", "/css/main.css"}, []string{})
-	c.HTMLString(200, html)
+	c.Header("Content-Type", "text/html")
+	c.String(200,html)
 }
 
 func UserHtml(c *gin.Context) {
@@ -105,7 +106,8 @@ func GenerateAuthorizedScreen(
 	}
 	scripts := util.CreateScript(login, script)
 	html := createHtml(title, js, jslib, css, scripts)
-	c.HTMLString(200, html)
+	c.Header("Content-Type", "text/html")
+	c.String(200, html)
 }
 func GetScreen(c *gin.Context) string {
 	path := c.Request.URL.Path

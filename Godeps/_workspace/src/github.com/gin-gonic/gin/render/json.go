@@ -1,3 +1,7 @@
+// Copyright 2014 Manu Martinez-Almeida.  All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
+
 package render
 
 import (
@@ -6,30 +10,32 @@ import (
 )
 
 type (
-	jsonRender struct{}
+	JSON struct {
+		Data interface{}
+	}
 
-	indentedJSON struct{}
+	IndentedJSON struct {
+		Data interface{}
+	}
 )
 
-func (_ jsonRender) Render(w http.ResponseWriter, code int, data ...interface{}) error {
-	return WriteJSON(w, code, data[0])
+var jsonContentType = []string{"application/json; charset=utf-8"}
+
+func (r JSON) Render(w http.ResponseWriter) error {
+	return WriteJSON(w, r.Data)
 }
 
-func (_ indentedJSON) Render(w http.ResponseWriter, code int, data ...interface{}) error {
-	return WriteIndentedJSON(w, code, data[0])
-}
-
-func WriteJSON(w http.ResponseWriter, code int, data interface{}) error {
-	writeHeader(w, code, "application/json; charset=utf-8")
-	return json.NewEncoder(w).Encode(data)
-}
-
-func WriteIndentedJSON(w http.ResponseWriter, code int, data interface{}) error {
-	writeHeader(w, code, "application/json; charset=utf-8")
-	jsonData, err := json.MarshalIndent(data, "", "    ")
+func (r IndentedJSON) Render(w http.ResponseWriter) error {
+	writeContentType(w, jsonContentType)
+	jsonBytes, err := json.MarshalIndent(r.Data, "", "    ")
 	if err != nil {
 		return err
 	}
-	_, err = w.Write(jsonData)
-	return err
+	w.Write(jsonBytes)
+	return nil
+}
+
+func WriteJSON(w http.ResponseWriter, obj interface{}) error {
+	writeContentType(w, jsonContentType)
+	return json.NewEncoder(w).Encode(obj)
 }

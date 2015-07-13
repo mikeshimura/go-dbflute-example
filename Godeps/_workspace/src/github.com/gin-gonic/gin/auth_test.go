@@ -14,27 +14,25 @@ import (
 )
 
 func TestBasicAuth(t *testing.T) {
-	accounts := Accounts{
+	pairs := processAccounts(Accounts{
 		"admin": "password",
 		"foo":   "bar",
 		"bar":   "foo",
-	}
-	expectedPairs := authPairs{
-		authPair{
-			User:  "admin",
-			Value: "Basic YWRtaW46cGFzc3dvcmQ=",
-		},
-		authPair{
-			User:  "bar",
-			Value: "Basic YmFyOmZvbw==",
-		},
-		authPair{
-			User:  "foo",
-			Value: "Basic Zm9vOmJhcg==",
-		},
-	}
-	pairs := processAccounts(accounts)
-	assert.Equal(t, pairs, expectedPairs)
+	})
+
+	assert.Len(t, pairs, 3)
+	assert.Contains(t, pairs, authPair{
+		User:  "bar",
+		Value: "Basic YmFyOmZvbw==",
+	})
+	assert.Contains(t, pairs, authPair{
+		User:  "foo",
+		Value: "Basic Zm9vOmJhcg==",
+	})
+	assert.Contains(t, pairs, authPair{
+		User:  "admin",
+		Value: "Basic YWRtaW46cGFzc3dvcmQ=",
+	})
 }
 
 func TestBasicAuthFails(t *testing.T) {
@@ -131,7 +129,7 @@ func TestBasicAuth401WithCustomRealm(t *testing.T) {
 	called := false
 	accounts := Accounts{"foo": "bar"}
 	router := New()
-	router.Use(BasicAuthForRealm(accounts, "My Custom Realm"))
+	router.Use(BasicAuthForRealm(accounts, "My Custom \"Realm\""))
 	router.GET("/login", func(c *Context) {
 		called = true
 		c.String(200, c.MustGet(AuthUserKey).(string))
@@ -144,5 +142,5 @@ func TestBasicAuth401WithCustomRealm(t *testing.T) {
 
 	assert.False(t, called)
 	assert.Equal(t, w.Code, 401)
-	assert.Equal(t, w.HeaderMap.Get("WWW-Authenticate"), "Basic realm=\"My Custom Realm\"")
+	assert.Equal(t, w.HeaderMap.Get("WWW-Authenticate"), "Basic realm=\"My Custom \\\"Realm\\\"\"")
 }

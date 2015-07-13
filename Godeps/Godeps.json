@@ -2,18 +2,13 @@
 	"ImportPath": "godbfexam",
 	"GoVersion": "go1.4.2",
 	"Packages": [
-		"godbfexam/..."
+		"./..."
 	],
 	"Deps": [
 		{
-			"ImportPath": "github.com/pborman/uuid",
-			"Comment": "null-15",
-			"Rev": "ca53cad383cad2479bbba7f7a1a05797ec1386e4"
-		},
-		{
 			"ImportPath": "github.com/cihub/seelog",
-			"Comment": "go1.1-76-g8762324",
-			"Rev": "8762324945b8f31888f8bfa3bd7fca04c20e2639"
+			"Comment": "go1.1-81-gc510775",
+			"Rev": "c510775bb50d98213cfafca75a4bc5e3fddc8d8f"
 		},
 		{
 			"ImportPath": "github.com/djimenez/iconv-go",
@@ -21,21 +16,21 @@
 		},
 		{
 			"ImportPath": "github.com/gin-gonic/gin",
-			"Comment": "v0.4-222-g05d01d2",
-			"Rev": "05d01d2282a7cf1d78bd4525ee6e0637be4eec35"
+			"Comment": "v1.0rc1-136-gfd5d429",
+			"Rev": "fd5d4294a5d5223d55fc76d7840f4b0ad91647bb"
 		},
 		{
 			"ImportPath": "github.com/lib/pq",
-			"Comment": "go1.0-cutoff-47-g93e9980",
-			"Rev": "93e9980741c9e593411b94e07d5bad8cfb4809db"
+			"Comment": "go1.0-cutoff-56-gdc50b6a",
+			"Rev": "dc50b6ad2d3ee836442cf3389009c7cd1e64bb43"
 		},
 		{
 			"ImportPath": "github.com/manucorporat/sse",
-			"Rev": "c60c0e49b3ad42e8386e07720f0f561dd6bedaef"
+			"Rev": "c142f0f1baea5cef7f98a8a6c222f6134368c1f5"
 		},
 		{
 			"ImportPath": "github.com/mattn/go-colorable",
-			"Rev": "d67e0b7d1797975196499f79bcc322c08b9f218b"
+			"Rev": "40e4aedc8fabf8c23e040057540867186712faa5"
 		},
 		{
 			"ImportPath": "github.com/mattn/go-isatty",
@@ -51,16 +46,20 @@
 		},
 		{
 			"ImportPath": "github.com/mikeshimura/dfweb",
-			"Rev": "2bb16dad857bd3e749a083c422315c792febb667"
+			"Rev": "d6b9e2b4faeac351419759b3a98a2ce6dc6f3538"
+		},
+		{
+			"ImportPath": "github.com/pborman/uuid",
+			"Rev": "ca53cad383cad2479bbba7f7a1a05797ec1386e4"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",
-			"Rev": "5aa7325eaa14d7ed4b520f40d58adf2834c8de01"
+			"Rev": "d9558e5c97f85372afee28cf2b6059d7d3818919"
 		},
 		{
-			"ImportPath": "gopkg.in/joeybloggs/go-validate-yourself.v4",
-			"Comment": "v4.0.4",
-			"Rev": "47a6634ff80051b92481b6c076854b85119fd267"
+			"ImportPath": "gopkg.in/bluesuncorp/validator.v5",
+			"Comment": "v5.10.1",
+			"Rev": "06aac46c918960c01a241888042fc5e4e922b899"
 		}
 	]
 }

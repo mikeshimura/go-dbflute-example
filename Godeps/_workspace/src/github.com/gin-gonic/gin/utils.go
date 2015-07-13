@@ -6,11 +6,43 @@ package gin
 
 import (
 	"encoding/xml"
+	"net/http"
 	"path"
 	"reflect"
 	"runtime"
 	"strings"
 )
+
+const BindKey = "_gin-gonic/gin/bindkey"
+
+func Bind(val interface{}) HandlerFunc {
+	value := reflect.ValueOf(val)
+	if value.Kind() == reflect.Ptr {
+		panic(`Bind struct can not be a pointer. Example:
+	Use: gin.Bind(Struct{}) instead of gin.Bind(&Struct{})
+`)
+	}
+	typ := value.Type()
+
+	return func(c *Context) {
+		obj := reflect.New(typ).Interface()
+		if c.Bind(obj) == nil {
+			c.Set(BindKey, obj)
+		}
+	}
+}
+
+func WrapF(f http.HandlerFunc) HandlerFunc {
+	return func(c *Context) {
+		f(c.Writer, c.Request)
+	}
+}
+
+func WrapH(h http.Handler) HandlerFunc {
+	return func(c *Context) {
+		h.ServeHTTP(c.Writer, c.Request)
+	}
+}
 
 type H map[string]interface{}
 

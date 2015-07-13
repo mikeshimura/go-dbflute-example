@@ -1,25 +1,33 @@
+// Copyright 2014 Manu Martinez-Almeida.  All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
+
 package render
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 )
 
-type plainTextRender struct{}
+type String struct {
+	Format string
+	Data   []interface{}
+}
 
-func (_ plainTextRender) Render(w http.ResponseWriter, code int, data ...interface{}) error {
-	format := data[0].(string)
-	values := data[1].([]interface{})
-	WritePlainText(w, code, format, values)
+var plainContentType = []string{"text/plain; charset=utf-8"}
+
+func (r String) Render(w http.ResponseWriter) error {
+	WriteString(w, r.Format, r.Data)
 	return nil
 }
 
-func WritePlainText(w http.ResponseWriter, code int, format string, values []interface{}) {
-	writeHeader(w, code, "text/plain; charset=utf-8")
-	// we assume w.Write can not fail, is that right?
-	if len(values) > 0 {
-		fmt.Fprintf(w, format, values...)
+func WriteString(w http.ResponseWriter, format string, data []interface{}) {
+	writeContentType(w, plainContentType)
+
+	if len(data) > 0 {
+		fmt.Fprintf(w, format, data...)
 	} else {
-		w.Write([]byte(format))
+		io.WriteString(w, format)
 	}
 }
